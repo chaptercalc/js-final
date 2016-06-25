@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+  <!-- Firebase CDN -->
+  <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <!-- Handlebars CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+  <!-- custom scripts -->
+  <script src="main.js"></script>
+  <script src="insta.js"></script>
+
+</head>
+<body>
+  <script id="list-template" type="text/x-handlebars-template">
+    <li data-id={{id}}>{{message}}</li>
+  </script>
+
+  <form action="" id="message-form">
+    <input type="text" id="InsuranceCompany">Insurance Company<br>
+    <input type="text" id="MP">Minimum Premium:<br>
+    <input type="text" id="LinesOfBusiness">Lines of Business:<br>
+    <input type="text" id="Underwriter">Underwriter Contact:<br>
+    <input type="text" id="hitList">Hit List:<br>
+    <button>Post to board</button>
+  </form>
+
+<button id="showAll">ShowAllData</button>
+
+  <ul id="messages-list"></ul>
+
+//grab bootstrap CDN for CSS> 
+
+
+</body>
+</html>
