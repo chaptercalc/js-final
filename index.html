@@ -7,14 +7,30 @@
     <!-- Handlebars CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
   <!-- custom scripts -->
-  <script src="main.js"></script>
   <script src="insta.js"></script>
+  <script src="main.js"></script>
+
 
 </head>
-<body>
+<body>  
   <script id="list-template" type="text/x-handlebars-template">
-    <li data-id={{id}}>{{message}}</li>
+    <div id="holder">
+    <li data-id={{id}}>{{Company}}</li>
+      <ul>
+        <li data-id={{id}}>{{MP}}</li>
+        <li data-id={{id}}>{{LinesOfBusiness}}</li>
+        <li data-id={{id}}>{{Underwriter}}</li>
+        <li data-id={{id}}>{{HitList}}</li>
+      </ul>
+    </div>
   </script>
+
+
+  <script id="insta-template" type="text/x-handlebars-template">
+      <img src="{{instaGram}}">
+  </script>
+
+<button id="All">Show Items in Insta Profile</button>
 
   <form action="" id="message-form">
     <input type="text" id="InsuranceCompany">Insurance Company<br>
@@ -24,13 +40,27 @@
     <input type="text" id="hitList">Hit List:<br>
     <button>Post to board</button>
   </form>
+  <br>
 
-<button id="showAll">ShowAllData</button>
+    <button id="showAllMarkets">Show All Markets</button>
+    <br>
+    
+    <button id="construction">Construction Markets</button>
+    <br>
+
+    <button id="envMarkets">Environmental Markets</button>
+    <br>
+
+    <button id="envMarkets">Clear All Data</button>
+    <br>
+
+
+
+
 
   <ul id="messages-list"></ul>
 
-//grab bootstrap CDN for CSS> 
-
+  <div id="instaStuff"></div>
 
 </body>
 </html>
