@@ -41,6 +41,7 @@ $('#showAllMarkets').click(function(event){
           LinesOfBusiness: results.val().LinesOfBusiness,
           Underwriter: results.val().Underwriter,
           HitList: results.val().HitList,
+         // id: results.key()
         };
 
         var templateHTML = template(data);
@@ -51,10 +52,10 @@ $('#showAllMarkets').click(function(event){
 });
 
 
-//query for only ENVmarkets
-$('#envMarkets').click(function(event){
-   //console.log(myDBReference.child('messages').ref().orderByChild('Company'));
-      myDBReference.child('messages').ref().orderByChild('Company').equalTo('Auto').on('child_added', function(results) { 
+//query for only Auto markets
+$('#Auto').click(function(event){
+
+      myDBReference.child('messages').ref().orderByChild('LinesOfBusiness').equalTo('Auto').on('child_added', function(results) { 
 
               var data = {
                 Company: results.val().Company,
@@ -71,29 +72,30 @@ $('#envMarkets').click(function(event){
 });
 
 
-//$('#construction').click(function(event){
+$('#Excess').click(function(event){
   
-  myDBReference.child('messages').on('child_added', function(results) { 
+      myDBReference.child('messages').ref().orderByChild('LinesOfBusiness').equalTo('Excess').on('child_added', function(results) { 
       
+              var data = {
+                Company: results.val().Company,
+                MP: results.val().MP,
+                LinesOfBusiness: results.val().LinesOfBusiness,
+                Underwriter: results.val().Underwriter,
+                HitList: results.val().HitList,
+              };
 
-        var data = {
-          Company: results.val().Company,
-          MP: results.val().MP,
-          LinesOfBusiness: results.val().LinesOfBusiness,
-          Underwriter: results.val().Underwriter,
-          HitList: results.val().HitList,
-        };
+              var templateHTML = template(data);
+              $('#messages-list').append(templateHTML);
+      });
+});
 
-        var templateHTML = template(data);
-        $('#messages-list').append(templateHTML);
 
-    });
+$('#SearchHitList').submit(function(event){
+      event.preventDefault();
 
-//});
+      var SHL = $('#SHLtext').val();
 
-$('#envMarkets').click(function(event){
-   //console.log(myDBReference.child('messages').ref().orderByChild('Company'));
-      myDBReference.child('messages').ref().orderByChild('Company').equalTo('Auto').on('child_added', function(results) { 
+      myDBReference.child('messages').ref().orderByChild('Company').equalTo(SHL).on('child_added', function(results) { 
 
               var data = {
                 Company: results.val().Company,
@@ -108,7 +110,6 @@ $('#envMarkets').click(function(event){
 
       });
 });
-
 
 
 
