@@ -8,7 +8,7 @@ $('#All').click(function(event) {
     // prevents page refresh
     event.preventDefault();
 	$.ajax({
-		url: 'https://api.instagram.com/v1/users/' + userid + '/media/recent', // or /users/self/media/recent for Sandbox
+		url: 'https://api.instagram.com/v1/users/' + userid + '/media/recent', 
 		dataType: 'jsonp',
 		type: 'GET',
 		data: {access_token: token, count: num_photos},

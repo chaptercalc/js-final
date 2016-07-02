@@ -1,16 +1,68 @@
 $(document).ready(function() {
   // create object instance of my Firebase database
-  var myDBReference = new Firebase('https://js-finalproject.firebaseio.com/');
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBgVDDlreaJDdbc6Ddfo--VElc6nBEqoSw",
+    authDomain: "js-finalproject.firebaseapp.com",
+    databaseURL: "https://js-finalproject.firebaseio.com",
+    storageBucket: "js-finalproject.appspot.com",
+  };
+  firebase.initializeApp(config);
+
+  var myDBReference = firebase.database().ref();
 
   var sourceTemplate = $('#list-template').html();
   var template = Handlebars.compile(sourceTemplate);
 
-  // define submit event listener/handler
-  $('#message-form').submit(function(event) {
-    // prevents page refresh
+
+// going to have to figure out how to hide the site until the user logs in. 
+// basically just wrap everything in a div. hide/unhide.
+
+$('#userCreateNew').submit(function(event) {
+      event.preventDefault();
+      var email = $('#email').val();
+      var password = $('#password').val();
+
+        if (email.length < 4) {
+          alert('Please enter an email address.');
+          return;
+        }
+        if (password.length < 4) {
+          alert('Please enter a password.');
+          return;
+        }
+
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          if (errorCode == 'auth/weak-password') {
+            alert('The password is too weak.');
+          } else {
+            alert(errorMessage);
+          }
+          console.log(error);
+        });
+
+      /**
+       * Sends an email verification to the user.
+       */
+      // function sendEmailVerification() {
+      //   // [START sendemailverification]
+      //   firebase.auth().currentUser.sendEmailVerification().then(function() {
+      //     // Email Verification sent!
+      //     // [START_EXCLUDE]
+      //     alert('Email Verification Sent!');
+      //     // [END_EXCLUDE]
+      //   });
+      //   // [END sendemailverification]
+      // }
+});
+
+
+$('#message-form').submit(function(event) {
     event.preventDefault();
 
-    // grab user input
+
     var InsuranceCompany = $('#InsuranceCompany').val();
     var MP = $('#MP').val();
     var LinesOfBusiness = $('#LinesOfBusiness').val();
@@ -18,6 +70,7 @@ $(document).ready(function() {
     var HitList = $('#hitList').val();
 
     var messagesReference = myDBReference.child('messages');
+
 
     messagesReference.push({
         Company: InsuranceCompany,
@@ -55,7 +108,7 @@ $('#showAllMarkets').click(function(event){
 //query for only Auto markets
 $('#Auto').click(function(event){
 
-      myDBReference.child('messages').ref().orderByChild('LinesOfBusiness').equalTo('Auto').on('child_added', function(results) { 
+      myDBReference.child('messages').orderByChild('LinesOfBusiness').equalTo('Auto').on('child_added', function(results) { 
 
               var data = {
                 Company: results.val().Company,
@@ -74,7 +127,7 @@ $('#Auto').click(function(event){
 
 $('#Excess').click(function(event){
   
-      myDBReference.child('messages').ref().orderByChild('LinesOfBusiness').equalTo('Excess').on('child_added', function(results) { 
+      myDBReference.child('messages').orderByChild('LinesOfBusiness').equalTo('Excess').on('child_added', function(results) { 
       
               var data = {
                 Company: results.val().Company,
@@ -90,12 +143,19 @@ $('#Excess').click(function(event){
 });
 
 
+
+
+$('#empty').click(function(event){
+  $('#messages-list').empty();
+});
+
+
 $('#SearchHitList').submit(function(event){
       event.preventDefault();
 
       var SHL = $('#SHLtext').val();
 
-      myDBReference.child('messages').ref().orderByChild('Company').equalTo(SHL).on('child_added', function(results) { 
+      myDBReference.child('messages').orderByChild('Company').equalTo(SHL).on('child_added', function(results) { 
 
               var data = {
                 Company: results.val().Company,

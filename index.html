@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <head>
+
+</head>
+<body>  
   <!-- Firebase CDN -->
-  <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
   <!-- jQuery CDN -->
   <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
     <!-- Handlebars CDN -->
@@ -11,8 +17,25 @@
   <script src="main.js"></script>
 
 
-</head>
-<body>  
+  <form action="" id="userCreateNew">
+    <input type="text" id="email">Email<br>
+    <input type="text" id="password">Password:<br>
+    <button>Submit for new account</button>
+  </form>
+  <br>
+
+<ul>
+  <li>Good looking site, with great layout (Bootstrap)</li>
+  <li>Able to click and update elements</li>
+  <li>User Logins, with todo list</li>
+  <li>When you click each market it drops down with additional info?</li>
+  <li>When you click a certain button you can edit each market?</li>
+  <li>Search functionality for hit list</li>
+  <li>Stopped at (NEXT STEPS) https://firebase.google.com/docs/auth/web/password-auth#next_steps</li>
+</ul>
+<br>
+
+
   <script id="list-template" type="text/x-handlebars-template">
     <div id="holder">
     <li data-id={{id}}>{{Company}}</li>
@@ -50,7 +73,11 @@
 
     <button id="Auto">Auto Markets</button>
     <br>
+
+    <button id="empty">Empty</button>
     <br>
+    <br>
+
 
   <form action="" id="SearchHitList">
     <input type="text" id="SHLtext"><br>
@@ -62,6 +89,10 @@
   <ul id="messages-list"></ul>
 
   <div id="instaStuff"></div>
+
+
+
+
 
 </body>
 </html>
