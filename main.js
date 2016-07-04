@@ -14,6 +14,8 @@ $(document).ready(function() {
   var sourceTemplate = $('#list-template').html();
   var template = Handlebars.compile(sourceTemplate);
 
+  var sourceTemplate2 = $('#user-info').html();
+  var template2 = Handlebars.compile(sourceTemplate2);
 
 // going to have to figure out how to hide the site until the user logs in. 
 // basically just wrap everything in a div. hide/unhide.
@@ -42,21 +44,72 @@ $('#userCreateNew').submit(function(event) {
           }
           console.log(error);
         });
+        signInAuth();
 
-      /**
-       * Sends an email verification to the user.
-       */
-      // function sendEmailVerification() {
-      //   // [START sendemailverification]
-      //   firebase.auth().currentUser.sendEmailVerification().then(function() {
-      //     // Email Verification sent!
-      //     // [START_EXCLUDE]
-      //     alert('Email Verification Sent!');
-      //     // [END_EXCLUDE]
-      //   });
-      //   // [END sendemailverification]
-      // }
+      function sendEmailVerification() {
+        // [START sendemailverification]
+        firebase.auth().currentUser.sendEmailVerification().then(function() {
+          // Email Verification sent!
+          // [START_EXCLUDE]
+          alert('Email Verification Sent!');
+          // [END_EXCLUDE]
+        });
+        // [END sendemailverification]
+      }
 });
+
+
+
+
+$('#SignIn').submit(function(event) {
+  event.preventDefault();
+        var email2 = $('#email2').val();
+        var password2 = $('#password2').val();
+        firebase.auth().signInWithEmailAndPassword(email2, password2).catch(function(error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+              if(errorCode === 'auth/wrong-password') {
+                  alert('Wrong Password.');
+              } else {
+                alert(errorMessage);
+              }
+              console.log(error);
+         
+        })
+
+      signInAuth();
+});
+
+$('#signOut').click(function(event){
+    firebase.auth().signOut();
+    console.log('Singing out');
+    $('#user-info-stuff').empty();
+
+   // console.log(firebase.auth().currentUser);
+});
+
+
+
+function signInAuth () {
+   firebase.auth().onAuthStateChanged(function(user){
+    if (user) {console.log('signed in')}
+      else {console.log('not signed in')}
+    var user = firebase.auth().currentUser;
+   // console.log(user);
+    console.log(user.uid);
+    console.log(user.email);
+
+        var data = {
+          USER: user.email
+        };
+
+              var templateHTML2 = template2(data);
+              $('#user-info-stuff').append(templateHTML2);
+
+  })
+
+};
+
 
 
 $('#message-form').submit(function(event) {

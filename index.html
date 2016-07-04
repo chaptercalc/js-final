@@ -17,12 +17,25 @@
   <script src="main.js"></script>
 
 
+  <div id="user-info-stuff"></div>
+
+
   <form action="" id="userCreateNew">
     <input type="text" id="email">Email<br>
     <input type="text" id="password">Password:<br>
     <button>Submit for new account</button>
   </form>
   <br>
+
+    <form action="" id="SignIn">
+    <input type="text" id="email2">Email<br>
+    <input type="text" id="password2">Password:<br>
+    <button>Sign In</button>
+  </form>
+
+  <button id="signOut">Sign Out</button>
+  <br>
+
 
 <ul>
   <li>Good looking site, with great layout (Bootstrap)</li>
@@ -34,6 +47,11 @@
   <li>Stopped at (NEXT STEPS) https://firebase.google.com/docs/auth/web/password-auth#next_steps</li>
 </ul>
 <br>
+
+
+ <script id="user-info" type="text/x-handlebars-template">
+      <p>{{USER}}</p>
+  </script>
 
 
   <script id="list-template" type="text/x-handlebars-template">
